@@ -18,7 +18,14 @@ node {
         }
 
         stage('Build Dev Docker Image') {
-            sh 'docker build . -t service-base'
+            def IMAGE_BASE_NAME="dboss/doers"
+            def DOCKER_IMAGE="$IMAGE_BASE_NAME:$BUILD_NUMBER"
+            sh "docker build . -t $IMAGE_BASE_NAME"
+            sh "docker tag $IMAGE_BASE_NAME $DOCKER_IMAGE"
+            sh "docker push $IMAGE_BASE_NAME"
+            sh "docker push $DOCKER_IMAGE"
+            sh "docker rmi $DOCKER_IMAGE"
+            sh "docker rmi $IMAGE_BASE_NAME"
         }
 
 }
