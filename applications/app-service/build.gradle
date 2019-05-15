@@ -3,7 +3,9 @@ apply plugin: 'org.springframework.boot'
 dependencies {
 	compile 'org.springframework.boot:spring-boot-starter'
 	compile project(":domain-usecase")
+	compile project(":entry-points-reactive-web")
 
 	compile 'org.reactivecommons.utils:object-mapper:0.1.0'
+	compile 'org.springframework.boot:spring-boot-starter-actuator'
 	runtime('org.springframework.boot:spring-boot-devtools')
 }
