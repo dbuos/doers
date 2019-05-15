@@ -8,7 +8,7 @@ import reactor.core.publisher.Mono;
 @RestController
 public class DoersService {
 
-    @GetMapping(path = "doers", produces = MediaType.TEXT_PLAIN_VALUE)
+    @GetMapping(path = "/", produces = MediaType.TEXT_PLAIN_VALUE)
     public Mono<String> get() {
         return Mono.just("OK");
     }
