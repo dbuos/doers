@@ -12,6 +12,7 @@ subprojects {
 
     dependencies {
         implementation 'io.projectreactor:reactor-core'
+        implementation 'org.reactivecommons:domain-events-api:0.0.7-beta1'
         implementation 'io.projectreactor.addons:reactor-extra'
 
         testImplementation 'org.springframework.boot:spring-boot-starter-test'

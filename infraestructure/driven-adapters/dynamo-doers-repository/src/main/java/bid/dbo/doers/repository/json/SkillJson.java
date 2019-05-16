@@ -1,6 +1,6 @@
 package bid.dbo.doers.repository.json;
 
-import bid.dbo.doers.domain.Skill;
+import bid.dbo.doers.domain.doers.Skill;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

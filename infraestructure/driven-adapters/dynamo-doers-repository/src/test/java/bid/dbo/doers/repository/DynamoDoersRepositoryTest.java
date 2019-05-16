@@ -1,14 +1,14 @@
 package bid.dbo.doers.repository;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
-import bid.dbo.doers.domain.Doer;
+import bid.dbo.doers.domain.doers.Doer;
+import bid.dbo.doers.domain.doers.Skill;
 import org.junit.Test;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
+
+import java.util.Arrays;
 
 public class DynamoDoersRepositoryTest {
 
@@ -23,6 +23,23 @@ public class DynamoDoersRepositoryTest {
                 System.out.println(doer);
                 assertThat(doer.getName()).contains("Nombre");
             }).verifyComplete();
+    }
+
+    @Test
+    public void save() {
+        Doer doer = Doer.builder().id("100").name("Daniel")
+            .skills(Arrays.asList(Skill.builder().skill("Madera").value(1.2).margin(0.2).build()))
+            .travelRadius(Arrays.asList("medellin", "envigado")).build();
+        repository.save(doer).as(StepVerifier::create)
+            .expectNextCount(1).verifyComplete();
+    }
+
+    @Test
+    public void findAll() {
+        repository.findAll().collectList().log()
+            .as(StepVerifier::create)
+            .assertNext(doers -> assertThat(doers).isNotNull())
+            .verifyComplete();
     }
 
     @Test

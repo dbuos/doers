@@ -2,6 +2,7 @@ package bid.dbo.doers.repository.json;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.json.JsonParseException;
 
@@ -17,9 +18,10 @@ class JSONObjectMapper {
         OBJECT_MAPPER = mapper;
     }
 
-    static <T> T read(String json, TypeReference<T> clazz) {
+    static <T> T read(JsonNode json, TypeReference<T> clazz) {
         try {
-            return OBJECT_MAPPER.readValue(json, clazz);
+            final String text = json.asText();
+            return text.isEmpty() ? null : OBJECT_MAPPER.readValue(text, clazz);
         } catch (IOException e) {
             throw new JsonParseException(e);
         }
