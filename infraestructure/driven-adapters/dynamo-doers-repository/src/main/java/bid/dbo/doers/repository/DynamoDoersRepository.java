@@ -7,6 +7,7 @@ import bid.dbo.doers.repository.json.DoerJson;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -21,6 +22,7 @@ import static reactor.core.publisher.Flux.just;
 
 @RequiredArgsConstructor
 @Component
+@Qualifier("remote")
 public class DynamoDoersRepository implements DoersRepository {
 
     private final WebClient client;

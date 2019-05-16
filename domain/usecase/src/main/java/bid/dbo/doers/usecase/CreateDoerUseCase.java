@@ -23,15 +23,15 @@ public class CreateDoerUseCase {
         return uuid()
             .map(id -> doer.toBuilder().id(id).build())
             .flatMap(newDoer -> {
-                final Mono<Void> saveToService = doersService.save(newDoer)
+                final Mono<Doer> saveToService = doersService.save(newDoer)
                     .timeout(ofSeconds(5))
                     .onErrorResume(err -> notifyFailOnSave(doer));
                 return when(doersDb.save(newDoer), saveToService);
             });
     }
 
-    private Mono<Void> notifyFailOnSave(Doer doer) {
-        return from(eventBus.emit(new DoerSaveFailed(doer.getId(), doer)));
+    private Mono<Doer> notifyFailOnSave(Doer doer) {
+        return from(eventBus.emit(new DoerSaveFailed(doer.getId(), doer))).thenReturn(doer);
     }
 
 }

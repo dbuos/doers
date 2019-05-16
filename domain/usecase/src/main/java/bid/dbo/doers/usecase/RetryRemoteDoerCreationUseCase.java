@@ -15,6 +15,6 @@ public class RetryRemoteDoerCreationUseCase {
     public Mono<Void> retryCreateDoer(Doer doer) {
         return doersService.save(doer)
             .timeout(ofSeconds(15))
-            .retryBackoff(4, ofSeconds(3));
+            .retryBackoff(4, ofSeconds(3)).then();
     }
 }

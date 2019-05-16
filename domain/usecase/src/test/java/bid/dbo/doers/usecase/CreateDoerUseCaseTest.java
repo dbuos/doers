@@ -37,8 +37,8 @@ public class CreateDoerUseCaseTest {
     public void createDoerShouldSaveInBothRepositories() {
         Doer doer = Doer.builder().name("Test Doer").build();
 
-        PublisherProbe<Void> localAction = PublisherProbe.empty();
-        PublisherProbe<Void> remoteAction = PublisherProbe.empty();
+        PublisherProbe<Doer> localAction = PublisherProbe.empty();
+        PublisherProbe<Doer> remoteAction = PublisherProbe.empty();
 
         when(externalRepo.save(any())).thenReturn(remoteAction.mono());
         when(localRepo.save(any())).thenReturn(localAction.mono());
@@ -54,7 +54,7 @@ public class CreateDoerUseCaseTest {
     public void createDoerShouldContinueOnRemoteError() throws InterruptedException {
         final Doer doer = Doer.builder().name("Test Doer").build();
 
-        final PublisherProbe<Void> localAction = PublisherProbe.empty();
+        final PublisherProbe<Doer> localAction = PublisherProbe.empty();
         final PublisherProbe<Void> eventAction = PublisherProbe.empty();
 
         when(externalRepo.save(any())).thenReturn(error(new RuntimeException()));

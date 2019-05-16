@@ -4,7 +4,10 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter'
 	compile project(":domain-usecase")
 	compile project(":entry-points-reactive-web")
+	compile project(":driven-adapters-dynamo-doers-repository")
+	compile project(":driven-adapters-mongodb-repository")
 
+	compile 'org.reactivecommons:async-commons-starter:0.0.7-beta1'
 	compile 'org.reactivecommons.utils:object-mapper:0.1.0'
 	compile 'org.springframework.boot:spring-boot-starter-actuator'
 	runtime('org.springframework.boot:spring-boot-devtools')
@@ -13,5 +16,5 @@ dependencies {
 //	compile 'org.springframework.security:spring-security-oauth2-client'
 //	compile 'org.springframework.security:spring-security-oauth2-resource-server'
 //	compile 'org.springframework.security:spring-security-oauth2-jose'
-	
+
 }
