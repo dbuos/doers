@@ -6,21 +6,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.text.NumberFormat;
+import java.util.logging.Logger;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MemUtils {
     public static void printInfo() {
         final MemInfo memInfo = getMemInfo();
-        System.out.println("========================== Memory Info ==========================");
-        System.out.println("Free memory: " + formatInMB(memInfo.getFreeMemory()));
-        System.out.println("Allocated memory: " + formatInMB(memInfo.allocatedMemory));
-        System.out.println("Max memory: " + formatInMB(memInfo.getMaxMemory()));
-        System.out.println("Total free memory: " + formatInMB(memInfo.getTotalFreeMemory()));
-        System.out.println("=================================================================");
+        final Logger log = Logger.getGlobal();
+        log.info("========================== Memory Info ==========================");
+        log.info("Free memory: " + formatInMB(memInfo.getFreeMemory()));
+        log.info("Allocated memory: " + formatInMB(memInfo.allocatedMemory));
+        log.info("Max memory: " + formatInMB(memInfo.getMaxMemory()));
+        log.info("Total free memory: " + formatInMB(memInfo.getTotalFreeMemory()));
+        log.info("=================================================================");
     }
 
     public static String formatInMB(long bytes) {
-        final long mb = 1024 * 1024;
+        final long mb = 1024 * 1024L;
         return NumberFormat.getInstance().format(bytes / mb) + " MB";
     }
 
